@@ -20,10 +20,12 @@ for i in range(0, 1000):
     review = review.lower()
     review = review.split()
     ps = PorterStemmer()
-    review = [ps.stem(word) for word in review if not word in set(stopwords.words('english'))]
+    all_stopwords=stopwords.words('english')
+    all_stopwords.remove('not')
+    review = [ps.stem(word) for word in review if not word in set(all_stopwords)]
     review = ' '.join(review)
     corpus.append(review)
-
+print(corpus)
 # Creating the Bag of Words model
 from sklearn.feature_extraction.text import CountVectorizer
 cv = CountVectorizer(max_features = 1500)
